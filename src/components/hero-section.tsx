@@ -17,10 +17,11 @@ export function HeroSection() {
         style={{
           backgroundImage: "url('/lovable-uploads/9f66b4b9-c6e2-409b-96c0-889172147793.png')",
           backgroundSize: "cover",
-          backgroundPosition: isMobile ? "center" : "center",
+          backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
           width: "100%",
           height: "100%",
+          opacity: "1",
         }}
       ></div>
       

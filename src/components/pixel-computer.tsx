@@ -1,6 +1,5 @@
-
 import React, { useState } from "react";
-import { AppWindow, Search, X, Maximize2, Minimize2, Window, Folder, FolderOpen, HelpCircle, File } from "lucide-react";
+import { AppWindow, Search, X, Maximize2, Minimize2, LayoutDashboard, Folder, FolderOpen, HelpCircle, File } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Command, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem } from "@/components/ui/command";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
@@ -194,7 +193,7 @@ const BlockchainExplorer = () => {
     <div className="w-full h-full flex flex-col">
       <div className="bg-primary text-primary-foreground p-1 flex items-center">
         <div className="flex items-center gap-1 mr-4">
-          <Window className="h-4 w-4" />
+          <AppWindow className="h-4 w-4" />
           <span className="text-xs font-pixel">BlockchainOS v1.0</span>
         </div>
         <div className="flex items-center gap-3">
@@ -314,7 +313,7 @@ const BlockchainExplorer = () => {
       <div className="bg-primary text-primary-foreground p-1 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <button className="bg-primary-foreground/20 rounded p-1">
-            <Window className="h-4 w-4" />
+            <AppWindow className="h-4 w-4" />
           </button>
         </div>
         <div className="text-xs font-pixel">

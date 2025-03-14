@@ -1,92 +1,72 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --background: 220 33% 98%;
+    --foreground: 222 47% 11%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 222 47% 11%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 222 47% 11%;
 
-    --primary: 222.2 47.4% 11.2%;
+    --primary: 221 83% 53%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 261 73% 63%;
+    --accent-foreground: 210 40% 98%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 221 83% 53%;
 
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --radius: 0rem;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
+    --background: 222 47% 11%;
     --foreground: 210 40% 98%;
 
-    --card: 222.2 84% 4.9%;
+    --card: 222 47% 11%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222.2 84% 4.9%;
+    --popover: 222 47% 11%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 221 83% 53%;
+    --primary-foreground: 210 40% 98%;
 
-    --secondary: 217.2 32.6% 17.5%;
+    --secondary: 217 33% 17%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 217 33% 17%;
+    --muted-foreground: 215 20% 65%;
 
-    --accent: 217.2 32.6% 17.5%;
+    --accent: 261 73% 63%;
     --accent-foreground: 210 40% 98%;
 
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 63% 31%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 217 33% 17%;
+    --input: 217 33% 17%;
+    --ring: 224 76% 48%;
   }
 }
 
@@ -94,8 +74,157 @@
   * {
     @apply border-border;
   }
-
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-mono;
+    image-rendering: pixelated;
+  }
+  
+  /* Pixel Art styles */
+  .pixel-corners {
+    clip-path: polygon(
+      0px 4px,
+      4px 0px,
+      calc(100% - 4px) 0px,
+      100% 4px,
+      100% calc(100% - 4px),
+      calc(100% - 4px) 100%,
+      4px 100%,
+      0px calc(100% - 4px)
+    );
+  }
+  
+  .pixel-shadow {
+    position: relative;
+  }
+  
+  .pixel-shadow::after {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    right: -4px;
+    bottom: -4px;
+    background: rgba(0, 0, 0, 0.2);
+    z-index: -1;
+  }
+  
+  .pixel-border {
+    position: relative;
+    box-shadow: 0 0 0 2px currentColor;
+  }
+  
+  .pixel-border::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: inset 0 0 0 2px currentColor;
+    z-index: 1;
+    pointer-events: none;
+  }
+  
+  /* Animations */
+  .animate-delayed {
+    animation-delay: 300ms;
+  }
+  
+  .animate-delayed-medium {
+    animation-delay: 600ms;
+  }
+  
+  .animate-delayed-long {
+    animation-delay: 900ms;
+  }
+  
+  /* Grid background with scanlines for CRT effect */
+  .crt-overlay {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .crt-overlay::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      rgba(18, 16, 16, 0) 50%,
+      rgba(0, 0, 0, 0.05) 50%
+    );
+    background-size: 100% 4px;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0.15;
+  }
+  
+  /* Terminal text effect */
+  .terminal-text::after {
+    content: "|";
+    animation: blink 1s step-end infinite;
+  }
+}
+
+/* Pixel art button and UI component styles */
+@layer components {
+  .pixel-btn {
+    @apply relative inline-flex items-center justify-center bg-primary text-primary-foreground 
+           font-pixel text-xs py-2 px-4 no-underline uppercase tracking-wide
+           transition-all duration-150 ease-in-out shadow-pixel;
+    image-rendering: pixelated;
+  }
+  
+  .pixel-btn:hover {
+    @apply transform -translate-y-1 shadow-pixel-md;
+  }
+  
+  .pixel-btn:active {
+    @apply transform translate-y-0 shadow-pixel;
+  }
+  
+  .pixel-card {
+    @apply relative bg-card p-5 shadow-pixel border-2 border-border;
+    image-rendering: pixelated;
+  }
+  
+  .pixel-input {
+    @apply bg-background border-2 border-border px-4 py-2 outline-none focus:border-primary
+           transition-colors duration-200 shadow-pixel font-mono;
+  }
+  
+  .nav-link {
+    @apply relative px-2 py-1 text-foreground transition-colors
+           hover:text-primary focus:text-primary font-pixel text-xs;
+  }
+  
+  .nav-link::after {
+    content: '';
+    @apply absolute bottom-0 left-0 w-0 h-[3px] bg-primary transition-all duration-300;
+  }
+  
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+  
+  .section-title {
+    @apply font-pixel text-2xl mb-8 inline-block;
+    text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
+  }
+  
+  .pixel-progress {
+    @apply h-6 w-full bg-muted relative overflow-hidden border-2 border-border;
+  }
+  
+  .pixel-progress-bar {
+    @apply h-full bg-primary transition-all duration-500 ease-out;
+  }
+  
+  .tech-badge {
+    @apply inline-flex items-center px-3 py-1 font-pixel text-xs 
+           bg-muted text-foreground shadow-pixel border border-border;
   }
 }

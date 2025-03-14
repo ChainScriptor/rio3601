@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { AppWindow, Search, X, Maximize2, Minimize2, LayoutDashboard, Folder, FolderOpen, HelpCircle, File } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -206,7 +207,7 @@ const BlockchainExplorer = () => {
       
       <div className="flex-1 flex">
         <ResizablePanelGroup direction="horizontal">
-          <ResizablePanel defaultSize={25} className="bg-card/80 min-w-[150px]">
+          <ResizablePanel defaultSize={20} minSize={15} className="bg-card/80 min-w-[150px]">
             <div className="p-2">
               <h3 className="font-pixel text-xs mb-2">Explore</h3>
               <div className="space-y-1">
@@ -258,7 +259,7 @@ const BlockchainExplorer = () => {
           
           <ResizableHandle withHandle />
           
-          <ResizablePanel defaultSize={75}>
+          <ResizablePanel defaultSize={80}>
             <div className="relative h-full bg-background/90 p-2">
               <div className="absolute top-2 left-2 right-2">
                 <div className="flex items-center gap-2 mb-2">
@@ -274,7 +275,7 @@ const BlockchainExplorer = () => {
                 </div>
               </div>
               
-              <div className="mt-12 relative">
+              <div className="mt-12 relative h-[calc(100%-3rem)]">
                 {/* Desktop area */}
                 <div className="grid grid-cols-4 gap-3 p-2">
                   {blockchains
@@ -299,7 +300,7 @@ const BlockchainExplorer = () => {
                     className="absolute inset-0 m-2"
                     onClose={() => handleClose(window.id)}
                   >
-                    <ScrollArea className="h-full">
+                    <ScrollArea className="h-full max-h-[calc(100vh-10rem)]">
                       {renderBlockchainContent(window.content)}
                     </ScrollArea>
                   </PixelWindow>
@@ -330,7 +331,7 @@ export function PixelComputer() {
       <div className="absolute inset-0 crt-overlay pointer-events-none"></div>
       
       {/* Computer frame */}
-      <div className="relative w-full md:w-[90%] lg:w-[80%] mx-auto h-full md:h-[80vh] flex flex-col">
+      <div className="relative w-full md:w-[90%] lg:w-[80%] mx-auto h-full md:h-[90vh] flex flex-col">
         <div className="w-full h-4 bg-foreground/80 rounded-t-lg"></div>
         
         {/* Monitor bezel */}

@@ -5,7 +5,7 @@ import { AboutSection } from "@/components/about-section";
 import { SkillsSection } from "@/components/skills-section";
 import { ProjectsSection } from "@/components/projects-section";
 import { ContactSection } from "@/components/contact-section";
-import { BlockchainSection } from "@/components/blockchain-section";
+import { PixelComputer } from "@/components/pixel-computer";
 import { Footer } from "@/components/footer";
 import { ThemeProvider } from "@/components/theme-provider";
 
@@ -18,7 +18,7 @@ const Index = () => {
           <HeroSection />
           <AboutSection />
           <SkillsSection />
-          <BlockchainSection />
+          <PixelComputer />
           <ProjectsSection />
           <ContactSection />
         </main>

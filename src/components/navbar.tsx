@@ -28,7 +28,6 @@ export function Navbar() {
     { name: "Blockchain", href: "#blockchain" },
     { name: "Projects", href: "#projects" },
     { name: "Contact", href: "#contact" },
-    { name: "Discord", href: "/discord" },
   ];
 
   return (

@@ -158,7 +158,7 @@ const BlockchainExplorer = () => {
     if (!blockchain) return null;
     
     return (
-      <div className="p-4 font-mono text-sm space-y-4">
+      <div className="p-4 font-mono text-sm space-y-4 bg-white text-black h-full">
         <div className="mb-4">
           <h3 className="font-pixel text-lg text-primary mb-2">{blockchain.name}</h3>
           <p className="mb-2 text-xs">{blockchain.description}</p>

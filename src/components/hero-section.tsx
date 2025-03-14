@@ -1,30 +1,41 @@
 
 import { Terminal, Github, Linkedin, Mail } from "lucide-react";
 import { BlockchainIcon, CodeBlock, CubeIcon } from "./pixel-art";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export function HeroSection() {
+  const isMobile = useIsMobile();
+
   return (
     <section 
       id="home" 
       className="min-h-screen pt-20 flex flex-col items-center justify-center relative overflow-hidden"
-      style={{
-        backgroundImage: "url('/lovable-uploads/9f66b4b9-c6e2-409b-96c0-889172147793.png')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-      }}
     >
-      <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]"></div>
-      <div className="absolute inset-0 crt-overlay"></div>
+      {/* Background image container - using div with absolute positioning instead of CSS background */}
+      <div 
+        className="absolute inset-0 z-0"
+        style={{
+          backgroundImage: "url('/lovable-uploads/9f66b4b9-c6e2-409b-96c0-889172147793.png')",
+          backgroundSize: "cover",
+          backgroundPosition: isMobile ? "center" : "center",
+          backgroundRepeat: "no-repeat",
+          width: "100%",
+          height: "100%",
+        }}
+      ></div>
+      
+      {/* Overlay layers */}
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px] z-[1]"></div>
+      <div className="absolute inset-0 crt-overlay z-[2]"></div>
       
       {/* Decorative elements */}
-      <div className="absolute top-1/4 left-1/6 opacity-60 animate-float">
+      <div className="absolute top-1/4 left-1/6 opacity-60 animate-float z-10">
         <CubeIcon />
       </div>
-      <div className="absolute bottom-1/4 right-1/6 opacity-60">
+      <div className="absolute bottom-1/4 right-1/6 opacity-60 z-10">
         <BlockchainIcon />
       </div>
-      <div className="absolute top-2/3 left-1/3 opacity-60 animate-delayed">
+      <div className="absolute top-2/3 left-1/3 opacity-60 animate-delayed z-10">
         <CodeBlock />
       </div>
       
@@ -87,7 +98,7 @@ export function HeroSection() {
       </div>
       
       {/* Scroll indicator */}
-      <div className="absolute bottom-10 left-0 right-0 flex justify-center animate-bounce">
+      <div className="absolute bottom-10 left-0 right-0 flex justify-center animate-bounce z-10">
         <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center">
           <div className="w-1 h-2 bg-white rounded-full mt-2 animate-pulse"></div>
         </div>

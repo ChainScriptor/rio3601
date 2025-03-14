@@ -1,4 +1,3 @@
-
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Bitcoin, Layers, Code, Database, Server } from "lucide-react";
@@ -118,10 +117,10 @@ export function BlockchainSection() {
     }
   };
 
+  // Removed the inline style object causing the TypeScript error
   const pixelBorderStyle = {
     boxShadow: "4px 4px 0px rgba(0, 0, 0, 0.2)",
     border: "2px solid currentColor",
-    imageRendering: "pixelated"
   };
 
   return (
@@ -150,7 +149,7 @@ export function BlockchainSection() {
 
         <div className="mt-10">
           <Tabs defaultValue="blockchain-intro" className="w-full">
-            <TabsList className="grid grid-cols-2 md:grid-cols-6 mb-8 w-full pixel-corners overflow-hidden" style={pixelBorderStyle}>
+            <TabsList className="grid grid-cols-2 md:grid-cols-6 mb-8 w-full pixel-corners overflow-hidden pixel-img-rendering" style={pixelBorderStyle}>
               <TabsTrigger value="blockchain-intro" className="font-pixel text-xs">Introduction</TabsTrigger>
               {blockchains.map(blockchain => (
                 <TabsTrigger key={blockchain.id} value={blockchain.id} className="font-pixel text-xs">
@@ -165,7 +164,7 @@ export function BlockchainSection() {
                 animate="visible"
                 variants={containerVariants}
               >
-                <Card className="border-2 border-primary/20 bg-card/50 backdrop-blur pixel-corners" style={pixelBorderStyle}>
+                <Card className="border-2 border-primary/20 bg-card/50 backdrop-blur pixel-corners pixel-img-rendering" style={pixelBorderStyle}>
                   <CardHeader>
                     <CardTitle className="font-pixel text-xl">What is Blockchain?</CardTitle>
                     <CardDescription>The core technology behind cryptocurrencies and other decentralized applications</CardDescription>
@@ -212,7 +211,7 @@ export function BlockchainSection() {
                   animate="visible"
                   variants={containerVariants}
                 >
-                  <Card className="border-2 border-primary/20 bg-card/50 backdrop-blur overflow-hidden pixel-corners" style={pixelBorderStyle}>
+                  <Card className="border-2 border-primary/20 bg-card/50 backdrop-blur overflow-hidden pixel-corners pixel-img-rendering" style={pixelBorderStyle}>
                     <div className={`h-2 bg-gradient-to-r ${blockchain.color} w-full`}></div>
                     <CardHeader className="flex md:flex-row items-start justify-between">
                       <div>
@@ -221,7 +220,7 @@ export function BlockchainSection() {
                       </div>
                       <motion.div 
                         variants={iconVariants}
-                        className="mt-2 md:mt-0 bg-gradient-to-br p-3 rounded-full shadow-lg backdrop-blur-sm border border-muted pixel-corners"
+                        className="mt-2 md:mt-0 bg-gradient-to-br p-3 rounded-full shadow-lg backdrop-blur-sm border border-muted pixel-corners pixel-img-rendering"
                         style={pixelBorderStyle}
                       >
                         {blockchain.icon}
@@ -251,7 +250,7 @@ export function BlockchainSection() {
                       {/* Gamification element - blockchain power meter */}
                       <motion.div 
                         variants={itemVariants} 
-                        className="mt-6 bg-pixel-darkBlue p-4 pixel-corners"
+                        className="mt-6 bg-pixel-darkBlue p-4 pixel-corners pixel-img-rendering"
                         style={pixelBorderStyle}
                       >
                         <div className="flex justify-between items-center mb-2">

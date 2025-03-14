@@ -1,8 +1,9 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Bitcoin, Layers, Code, Database, Server } from "lucide-react";
+import { Bitcoin, Layers, Code, Database, Server, Brain } from "lucide-react";
 import { motion } from "framer-motion";
 import { PixelIcon, CodeBlock } from "./pixel-art";
+import { BlockchainQuiz } from "./blockchain-quiz";
 
 export function BlockchainSection() {
   const blockchains = [
@@ -127,6 +128,15 @@ export function BlockchainSection() {
     <section id="blockchain" className="py-20 bg-pixel-darkBlue bg-pixel-grid bg-[length:20px_20px] relative overflow-hidden">
       <div className="absolute inset-0 crt-overlay pointer-events-none"></div>
       
+      {/* Pixel art background */}
+      <div className="absolute inset-0 opacity-10 pointer-events-none pixel-img-rendering">
+        <img 
+          src="https://images.unsplash.com/photo-1518770660439-4636190af475" 
+          alt="Pixel grid background" 
+          className="w-full h-full object-cover"
+        />
+      </div>
+      
       {/* Decorative elements */}
       <div className="absolute top-1/4 right-10 opacity-80">
         <CodeBlock className="rotate-6 animate-float" />
@@ -149,8 +159,11 @@ export function BlockchainSection() {
 
         <div className="mt-10">
           <Tabs defaultValue="blockchain-intro" className="w-full">
-            <TabsList className="grid grid-cols-2 md:grid-cols-6 mb-8 w-full pixel-corners overflow-hidden pixel-img-rendering" style={pixelBorderStyle}>
+            <TabsList className="grid grid-cols-2 md:grid-cols-7 mb-8 w-full pixel-corners overflow-hidden pixel-img-rendering" style={pixelBorderStyle}>
               <TabsTrigger value="blockchain-intro" className="font-pixel text-xs">Introduction</TabsTrigger>
+              <TabsTrigger value="blockchain-quiz" className="font-pixel text-xs flex items-center gap-1">
+                <Brain className="w-3 h-3" /> Quiz
+              </TabsTrigger>
               {blockchains.map(blockchain => (
                 <TabsTrigger key={blockchain.id} value={blockchain.id} className="font-pixel text-xs">
                   {blockchain.name}
@@ -202,6 +215,10 @@ export function BlockchainSection() {
                   </CardContent>
                 </Card>
               </motion.div>
+            </TabsContent>
+            
+            <TabsContent value="blockchain-quiz">
+              <BlockchainQuiz />
             </TabsContent>
 
             {blockchains.map(blockchain => (

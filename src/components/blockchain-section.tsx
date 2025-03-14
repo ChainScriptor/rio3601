@@ -1,8 +1,9 @@
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Bitcoin, Layers, Code, Database, Server, Box } from "lucide-react";
+import { Bitcoin, Layers, Code, Database, Server } from "lucide-react";
 import { motion } from "framer-motion";
+import { PixelIcon, CodeBlock } from "./pixel-art";
 
 export function BlockchainSection() {
   const blockchains = [
@@ -18,7 +19,8 @@ export function BlockchainSection() {
         "High network security"
       ],
       useCase: "Primarily used as digital gold and a store of value.",
-      color: "from-orange-400 to-yellow-500"
+      color: "from-orange-400 to-yellow-500",
+      score: 85
     },
     {
       id: "ethereum",
@@ -32,7 +34,8 @@ export function BlockchainSection() {
         "Transition from Proof of Work to Proof of Stake"
       ],
       useCase: "Supports DeFi, NFTs, DAOs and other decentralized applications.",
-      color: "from-purple-400 to-indigo-500"
+      color: "from-purple-400 to-indigo-500",
+      score: 92
     },
     {
       id: "solana",
@@ -46,7 +49,8 @@ export function BlockchainSection() {
         "Developer-friendly"
       ],
       useCase: "Ideal for applications requiring high performance such as DeFi and gaming.",
-      color: "from-green-400 to-teal-500"
+      color: "from-green-400 to-teal-500",
+      score: 88
     },
     {
       id: "cardano",
@@ -60,7 +64,8 @@ export function BlockchainSection() {
         "Sustainability and scalability"
       ],
       useCase: "Applications in education, agriculture, healthcare, and identity.",
-      color: "from-blue-400 to-cyan-500"
+      color: "from-blue-400 to-cyan-500",
+      score: 80
     },
     {
       id: "polkadot",
@@ -74,7 +79,8 @@ export function BlockchainSection() {
         "Shared security across all chains"
       ],
       useCase: "Connecting different blockchains and creating specialized chains.",
-      color: "from-pink-400 to-rose-500"
+      color: "from-pink-400 to-rose-500",
+      score: 83
     }
   ];
 
@@ -112,18 +118,39 @@ export function BlockchainSection() {
     }
   };
 
+  const pixelBorderStyle = {
+    boxShadow: "4px 4px 0px rgba(0, 0, 0, 0.2)",
+    border: "2px solid currentColor",
+    imageRendering: "pixelated"
+  };
+
   return (
-    <section id="blockchain" className="py-20 bg-background">
-      <div className="container mx-auto px-4">
-        <h2 className="section-title">Blockchain Layer 1</h2>
-        <p className="mb-8 max-w-3xl">
+    <section id="blockchain" className="py-20 bg-pixel-darkBlue bg-pixel-grid bg-[length:20px_20px] relative overflow-hidden">
+      <div className="absolute inset-0 crt-overlay pointer-events-none"></div>
+      
+      {/* Decorative elements */}
+      <div className="absolute top-1/4 right-10 opacity-80">
+        <CodeBlock className="rotate-6 animate-float" />
+      </div>
+      <div className="absolute bottom-1/4 left-10 opacity-80">
+        <PixelIcon color="bg-pixel-purple" className="w-12 h-12 animate-float" />
+      </div>
+      
+      <div className="container mx-auto px-4 relative z-10">
+        <h2 className="section-title text-pixel-green mb-4 inline-block pixel-corners bg-pixel-darkPurple px-4 py-2">Blockchain Layer 1</h2>
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="mb-8 max-w-3xl text-pixel-blue"
+        >
           Layer 1 blockchains are the base networks that provide infrastructure for decentralized applications.
           Each has its own characteristics, advantages, and limitations.
-        </p>
+        </motion.p>
 
         <div className="mt-10">
           <Tabs defaultValue="blockchain-intro" className="w-full">
-            <TabsList className="grid grid-cols-2 md:grid-cols-6 mb-8 w-full">
+            <TabsList className="grid grid-cols-2 md:grid-cols-6 mb-8 w-full pixel-corners overflow-hidden" style={pixelBorderStyle}>
               <TabsTrigger value="blockchain-intro" className="font-pixel text-xs">Introduction</TabsTrigger>
               {blockchains.map(blockchain => (
                 <TabsTrigger key={blockchain.id} value={blockchain.id} className="font-pixel text-xs">
@@ -138,7 +165,7 @@ export function BlockchainSection() {
                 animate="visible"
                 variants={containerVariants}
               >
-                <Card className="border-2 border-primary/20 bg-card/50 backdrop-blur">
+                <Card className="border-2 border-primary/20 bg-card/50 backdrop-blur pixel-corners" style={pixelBorderStyle}>
                   <CardHeader>
                     <CardTitle className="font-pixel text-xl">What is Blockchain?</CardTitle>
                     <CardDescription>The core technology behind cryptocurrencies and other decentralized applications</CardDescription>
@@ -185,7 +212,7 @@ export function BlockchainSection() {
                   animate="visible"
                   variants={containerVariants}
                 >
-                  <Card className="border-2 border-primary/20 bg-card/50 backdrop-blur overflow-hidden">
+                  <Card className="border-2 border-primary/20 bg-card/50 backdrop-blur overflow-hidden pixel-corners" style={pixelBorderStyle}>
                     <div className={`h-2 bg-gradient-to-r ${blockchain.color} w-full`}></div>
                     <CardHeader className="flex md:flex-row items-start justify-between">
                       <div>
@@ -194,7 +221,8 @@ export function BlockchainSection() {
                       </div>
                       <motion.div 
                         variants={iconVariants}
-                        className="mt-2 md:mt-0 bg-gradient-to-br p-3 rounded-full shadow-lg backdrop-blur-sm border border-muted"
+                        className="mt-2 md:mt-0 bg-gradient-to-br p-3 rounded-full shadow-lg backdrop-blur-sm border border-muted pixel-corners"
+                        style={pixelBorderStyle}
                       >
                         {blockchain.icon}
                       </motion.div>
@@ -218,6 +246,30 @@ export function BlockchainSection() {
                       <motion.div variants={itemVariants} className="grid gap-4 mt-4">
                         <h3 className="text-lg font-semibold">Use cases:</h3>
                         <p>{blockchain.useCase}</p>
+                      </motion.div>
+                      
+                      {/* Gamification element - blockchain power meter */}
+                      <motion.div 
+                        variants={itemVariants} 
+                        className="mt-6 bg-pixel-darkBlue p-4 pixel-corners"
+                        style={pixelBorderStyle}
+                      >
+                        <div className="flex justify-between items-center mb-2">
+                          <h4 className="font-pixel text-sm">Network Power</h4>
+                          <span className="font-pixel text-xs text-pixel-green">{blockchain.score}/100</span>
+                        </div>
+                        <div className="pixel-progress">
+                          <motion.div 
+                            initial={{ width: 0 }}
+                            animate={{ width: `${blockchain.score}%` }}
+                            transition={{ duration: 1, delay: 0.5 }}
+                            className="pixel-progress-bar"
+                          ></motion.div>
+                        </div>
+                        <div className="flex justify-between mt-2">
+                          <span className="text-xs">Achievement unlocked: {blockchain.name} Explorer</span>
+                          <span className="text-xs font-pixel text-pixel-yellow">+{blockchain.score} XP</span>
+                        </div>
                       </motion.div>
                     </CardContent>
                   </Card>

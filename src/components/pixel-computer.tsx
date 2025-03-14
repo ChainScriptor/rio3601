@@ -8,6 +8,7 @@ import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@/componen
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 interface WindowProps {
   title: string;
@@ -72,6 +73,7 @@ const BlockchainExplorer = () => {
   const [activeFolder, setActiveFolder] = useState<string | null>("blockchains");
   const [openWindows, setOpenWindows] = useState<{id: string, title: string, content: string}[]>([]);
   const [windowPositions, setWindowPositions] = useState<{[key: string]: number}>({});
+  const isMobile = useIsMobile();
   
   const blockchains = [
     {
@@ -207,7 +209,11 @@ const BlockchainExplorer = () => {
       
       <div className="flex-1 flex">
         <ResizablePanelGroup direction="horizontal">
-          <ResizablePanel defaultSize={20} minSize={15} className="bg-card/80 min-w-[150px]">
+          <ResizablePanel 
+            defaultSize={isMobile ? 30 : 20} 
+            minSize={isMobile ? 30 : 15} 
+            className="bg-card/80 min-w-[120px]"
+          >
             <div className="p-2">
               <h3 className="font-pixel text-xs mb-2">Explore</h3>
               <div className="space-y-1">
@@ -259,7 +265,7 @@ const BlockchainExplorer = () => {
           
           <ResizableHandle withHandle />
           
-          <ResizablePanel defaultSize={80}>
+          <ResizablePanel defaultSize={isMobile ? 70 : 80}>
             <div className="relative h-full bg-background/90 p-2">
               <div className="absolute top-2 left-2 right-2">
                 <div className="flex items-center gap-2 mb-2">
@@ -277,7 +283,10 @@ const BlockchainExplorer = () => {
               
               <div className="mt-12 relative h-[calc(100%-3rem)]">
                 {/* Desktop area */}
-                <div className="grid grid-cols-4 gap-3 p-2">
+                <div className={cn(
+                  "grid gap-3 p-2",
+                  isMobile ? "grid-cols-2" : "grid-cols-4"
+                )}>
                   {blockchains
                     .filter(b => b.name.toLowerCase().includes(searchTerm.toLowerCase()))
                     .map(blockchain => (
@@ -300,7 +309,7 @@ const BlockchainExplorer = () => {
                     className="absolute inset-0 m-2"
                     onClose={() => handleClose(window.id)}
                   >
-                    <ScrollArea className="h-full max-h-[calc(100vh-10rem)]">
+                    <ScrollArea className="h-full max-h-[calc(100vh-6rem)]">
                       {renderBlockchainContent(window.content)}
                     </ScrollArea>
                   </PixelWindow>
@@ -326,16 +335,23 @@ const BlockchainExplorer = () => {
 };
 
 export function PixelComputer() {
+  const isMobile = useIsMobile();
+  
   return (
-    <div className="relative h-full w-full bg-pixel-darkBlue bg-pixel-grid bg-[length:20px_20px] overflow-hidden">
+    <div className="relative py-16 md:py-24 min-h-[100vh] w-full bg-pixel-darkBlue bg-pixel-grid bg-[length:20px_20px] overflow-hidden">
       <div className="absolute inset-0 crt-overlay pointer-events-none"></div>
       
+      {/* Background image */}
+      <div className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-70" 
+           style={{ backgroundImage: 'url("/lovable-uploads/47970209-706b-487e-8627-d769dc745c6d.png")' }}>
+      </div>
+      
       {/* Computer frame */}
-      <div className="relative w-full md:w-[90%] lg:w-[80%] mx-auto h-full md:h-[90vh] flex flex-col">
-        <div className="w-full h-4 bg-foreground/80 rounded-t-lg"></div>
+      <div className="relative z-10 w-[95%] md:w-[90%] lg:w-[80%] mx-auto h-[80vh] md:h-[90vh] flex flex-col">
+        <div className="w-full h-4 bg-foreground/90 rounded-t-lg"></div>
         
         {/* Monitor bezel */}
-        <div className="flex-1 bg-foreground/80 flex p-2 md:p-4">
+        <div className="flex-1 bg-foreground/90 flex p-1 md:p-4">
           {/* Screen area */}
           <div className="w-full h-full bg-background pixel-corners overflow-hidden shadow-inner border-4 border-black/20 crt-overlay">
             <BlockchainExplorer />
@@ -343,7 +359,7 @@ export function PixelComputer() {
         </div>
         
         {/* Computer base */}
-        <div className="h-4 md:h-8 bg-foreground/80 rounded-b-lg flex items-center justify-center">
+        <div className="h-4 md:h-8 bg-foreground/90 rounded-b-lg flex items-center justify-center">
           <div className="h-1 md:h-2 w-12 md:w-24 bg-primary/30 rounded-full"></div>
         </div>
       </div>

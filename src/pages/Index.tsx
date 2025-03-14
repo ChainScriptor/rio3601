@@ -18,7 +18,9 @@ const Index = () => {
           <HeroSection />
           <AboutSection />
           <SkillsSection />
-          <PixelComputer />
+          <div id="blockchain" className="w-full">
+            <PixelComputer />
+          </div>
           <ProjectsSection />
           <ContactSection />
         </main>

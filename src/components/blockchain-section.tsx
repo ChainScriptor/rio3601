@@ -1,84 +1,130 @@
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Bitcoin, Layers, Code, Database, Server, Box } from "lucide-react";
+import { motion } from "framer-motion";
 
 export function BlockchainSection() {
   const blockchains = [
     {
       id: "bitcoin",
       name: "Bitcoin",
-      description: "Το πρώτο και πιο διαδεδομένο blockchain.",
+      description: "The first and most widely used blockchain.",
+      icon: <Bitcoin className="w-8 h-8 text-orange-500" />,
       features: [
-        "Αποκεντρωμένο ψηφιακό νόμισμα",
-        "Proof of Work συναίνεση",
-        "Περιορισμένη προσφορά 21 εκατομμυρίων νομισμάτων",
-        "Υψηλή ασφάλεια δικτύου"
+        "Decentralized digital currency",
+        "Proof of Work consensus",
+        "Limited supply of 21 million coins",
+        "High network security"
       ],
-      useCase: "Κυρίως χρησιμοποιείται ως ψηφιακός χρυσός και αποθήκη αξίας."
+      useCase: "Primarily used as digital gold and a store of value.",
+      color: "from-orange-400 to-yellow-500"
     },
     {
       id: "ethereum",
       name: "Ethereum",
-      description: "Η πρώτη πλατφόρμα έξυπνων συμβολαίων.",
+      description: "The first smart contract platform.",
+      icon: <Code className="w-8 h-8 text-purple-500" />,
       features: [
-        "Έξυπνα συμβόλαια",
-        "Αποκεντρωμένες εφαρμογές (dApps)",
+        "Smart contracts",
+        "Decentralized applications (dApps)",
         "EVM (Ethereum Virtual Machine)",
-        "Μετάβαση από Proof of Work σε Proof of Stake"
+        "Transition from Proof of Work to Proof of Stake"
       ],
-      useCase: "Υποστηρίζει DeFi, NFTs, DAOs και άλλες αποκεντρωμένες εφαρμογές."
+      useCase: "Supports DeFi, NFTs, DAOs and other decentralized applications.",
+      color: "from-purple-400 to-indigo-500"
     },
     {
       id: "solana",
       name: "Solana",
-      description: "Blockchain με υψηλή ταχύτητα και χαμηλά τέλη συναλλαγών.",
+      description: "Blockchain with high speed and low transaction fees.",
+      icon: <Layers className="w-8 h-8 text-green-500" />,
       features: [
         "Proof of History + Proof of Stake",
-        "Υψηλή απόδοση (~65.000 συναλλαγές/δευτερόλεπτο)",
-        "Χαμηλά τέλη συναλλαγών",
-        "Φιλικό προς τους προγραμματιστές"
+        "High performance (~65,000 transactions/second)",
+        "Low transaction fees",
+        "Developer-friendly"
       ],
-      useCase: "Ιδανικό για εφαρμογές που απαιτούν υψηλή απόδοση όπως DeFi και παιχνίδια."
+      useCase: "Ideal for applications requiring high performance such as DeFi and gaming.",
+      color: "from-green-400 to-teal-500"
     },
     {
       id: "cardano",
       name: "Cardano",
-      description: "Blockchain βασισμένο στην ακαδημαϊκή έρευνα.",
+      description: "Blockchain based on academic research.",
+      icon: <Server className="w-8 h-8 text-blue-500" />,
       features: [
         "Ouroboros Proof of Stake",
-        "Επιστημονική προσέγγιση ανάπτυξης",
-        "Πολυεπίπεδη αρχιτεκτονική",
-        "Βιωσιμότητα και επεκτασιμότητα"
+        "Scientific approach to development",
+        "Multi-layer architecture",
+        "Sustainability and scalability"
       ],
-      useCase: "Εφαρμογές σε εκπαίδευση, γεωργία, υγειονομική περίθαλψη και ταυτότητα."
+      useCase: "Applications in education, agriculture, healthcare, and identity.",
+      color: "from-blue-400 to-cyan-500"
     },
     {
       id: "polkadot",
       name: "Polkadot",
-      description: "Δίκτυο πολλαπλών αλυσίδων που επιτρέπει τη διαλειτουργικότητα.",
+      description: "Multi-chain network that enables interoperability.",
+      icon: <Database className="w-8 h-8 text-pink-500" />,
       features: [
-        "Παραλληλοποιημένες αλυσίδες (Parachains)",
-        "Διαλειτουργικότητα μεταξύ δικτύων",
+        "Parachains",
+        "Cross-network interoperability",
         "Nominated Proof of Stake",
-        "Κοινή ασφάλεια για όλες τις αλυσίδες"
+        "Shared security across all chains"
       ],
-      useCase: "Διασύνδεση διαφορετικών blockchain και δημιουργία εξειδικευμένων αλυσίδων."
+      useCase: "Connecting different blockchains and creating specialized chains.",
+      color: "from-pink-400 to-rose-500"
     }
   ];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { 
+      opacity: 1,
+      transition: { 
+        staggerChildren: 0.2,
+        delayChildren: 0.3
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 20, opacity: 0 },
+    visible: { 
+      y: 0, 
+      opacity: 1,
+      transition: { duration: 0.5 }
+    }
+  };
+
+  const iconVariants = {
+    hidden: { scale: 0, rotate: -180 },
+    visible: { 
+      scale: 1, 
+      rotate: 0,
+      transition: { 
+        type: "spring", 
+        stiffness: 260, 
+        damping: 20,
+        duration: 0.6 
+      }
+    }
+  };
 
   return (
     <section id="blockchain" className="py-20 bg-background">
       <div className="container mx-auto px-4">
         <h2 className="section-title">Blockchain Layer 1</h2>
         <p className="mb-8 max-w-3xl">
-          Τα Layer 1 blockchains είναι τα βασικά δίκτυα που παρέχουν την υποδομή για αποκεντρωμένες εφαρμογές. 
-          Κάθε ένα έχει τα δικά του χαρακτηριστικά, πλεονεκτήματα και περιορισμούς.
+          Layer 1 blockchains are the base networks that provide infrastructure for decentralized applications.
+          Each has its own characteristics, advantages, and limitations.
         </p>
 
         <div className="mt-10">
           <Tabs defaultValue="blockchain-intro" className="w-full">
             <TabsList className="grid grid-cols-2 md:grid-cols-6 mb-8 w-full">
-              <TabsTrigger value="blockchain-intro" className="font-pixel text-xs">Εισαγωγή</TabsTrigger>
+              <TabsTrigger value="blockchain-intro" className="font-pixel text-xs">Introduction</TabsTrigger>
               {blockchains.map(blockchain => (
                 <TabsTrigger key={blockchain.id} value={blockchain.id} className="font-pixel text-xs">
                   {blockchain.name}
@@ -87,68 +133,95 @@ export function BlockchainSection() {
             </TabsList>
 
             <TabsContent value="blockchain-intro" className="mt-4">
-              <Card className="border-2 border-primary/20 bg-card/50 backdrop-blur">
-                <CardHeader>
-                  <CardTitle className="font-pixel text-xl">Τι είναι το Blockchain;</CardTitle>
-                  <CardDescription>Βασική τεχνολογία πίσω από τα κρυπτονομίσματα και άλλες αποκεντρωμένες εφαρμογές</CardDescription>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <p>
-                    Το <strong>Blockchain</strong> είναι μια αποκεντρωμένη, κατανεμημένη και δημόσια βάση δεδομένων που καταγράφει 
-                    συναλλαγές σε πολλούς υπολογιστές, έτσι ώστε κάθε εγγραφή να μην μπορεί να τροποποιηθεί αναδρομικά. 
-                    Αυτή η τεχνολογία επιτρέπει ασφαλείς συναλλαγές χωρίς την ανάγκη κεντρικής αρχής.
-                  </p>
-                  
-                  <div className="grid gap-4 mt-6">
-                    <h3 className="text-lg font-semibold">Βασικά χαρακτηριστικά του Blockchain:</h3>
-                    <ul className="list-disc pl-5 space-y-2">
-                      <li><strong>Αποκέντρωση:</strong> Λειτουργεί χωρίς κεντρική αρχή</li>
-                      <li><strong>Διαφάνεια:</strong> Όλες οι συναλλαγές είναι δημόσια καταγεγραμμένες</li>
-                      <li><strong>Αμεταβλητότητα:</strong> Όταν καταγραφεί μια συναλλαγή, δεν μπορεί να αλλάξει</li>
-                      <li><strong>Ασφάλεια:</strong> Χρησιμοποιεί κρυπτογραφία για την προστασία των δεδομένων</li>
-                      <li><strong>Consensus:</strong> Απαιτεί συμφωνία του δικτύου για επικύρωση συναλλαγών</li>
-                    </ul>
-                  </div>
-                  
-                  <div className="grid gap-4 mt-6">
-                    <h3 className="text-lg font-semibold">Τι είναι τα Layer 1 Blockchains;</h3>
-                    <p>
-                      Τα <strong>Layer 1 Blockchains</strong> είναι τα βασικά δίκτυα blockchain που λειτουργούν στο δικό τους ανεξάρτητο 
-                      δίκτυο. Αυτά τα δίκτυα έχουν τους δικούς τους κανόνες συναίνεσης, τοκενομικά και χαρακτηριστικά. 
-                      Παραδείγματα περιλαμβάνουν το Bitcoin, το Ethereum, το Cardano, το Solana και το Polkadot.
-                    </p>
-                    <p>
-                      Κάθε Layer 1 προσπαθεί να επιλύσει το "τρίλημμα του blockchain", δηλαδή τον συμβιβασμό ανάμεσα στην 
-                      αποκέντρωση, την ασφάλεια και την επεκτασιμότητα, με διαφορετικές προσεγγίσεις και τεχνολογίες.
-                    </p>
-                  </div>
-                </CardContent>
-              </Card>
+              <motion.div
+                initial="hidden"
+                animate="visible"
+                variants={containerVariants}
+              >
+                <Card className="border-2 border-primary/20 bg-card/50 backdrop-blur">
+                  <CardHeader>
+                    <CardTitle className="font-pixel text-xl">What is Blockchain?</CardTitle>
+                    <CardDescription>The core technology behind cryptocurrencies and other decentralized applications</CardDescription>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <motion.p variants={itemVariants}>
+                      <strong>Blockchain</strong> is a decentralized, distributed, and public database that records 
+                      transactions across many computers so that any involved record cannot be altered retroactively. 
+                      This technology allows secure transactions without the need for a central authority.
+                    </motion.p>
+                    
+                    <motion.div variants={itemVariants} className="grid gap-4 mt-6">
+                      <h3 className="text-lg font-semibold">Key features of Blockchain:</h3>
+                      <ul className="list-disc pl-5 space-y-2">
+                        <motion.li variants={itemVariants}><strong>Decentralization:</strong> Operates without a central authority</motion.li>
+                        <motion.li variants={itemVariants}><strong>Transparency:</strong> All transactions are publicly recorded</motion.li>
+                        <motion.li variants={itemVariants}><strong>Immutability:</strong> Once a transaction is recorded, it cannot be changed</motion.li>
+                        <motion.li variants={itemVariants}><strong>Security:</strong> Uses cryptography to protect data</motion.li>
+                        <motion.li variants={itemVariants}><strong>Consensus:</strong> Requires network agreement to validate transactions</motion.li>
+                      </ul>
+                    </motion.div>
+                    
+                    <motion.div variants={itemVariants} className="grid gap-4 mt-6">
+                      <h3 className="text-lg font-semibold">What are Layer 1 Blockchains?</h3>
+                      <motion.p variants={itemVariants}>
+                        <strong>Layer 1 Blockchains</strong> are the base networks that operate on their own independent 
+                        blockchain. These networks have their own consensus mechanisms, tokenomics, and features. 
+                        Examples include Bitcoin, Ethereum, Cardano, Solana, and Polkadot.
+                      </motion.p>
+                      <motion.p variants={itemVariants}>
+                        Each Layer 1 attempts to solve the "blockchain trilemma", the trade-off between 
+                        decentralization, security, and scalability, with different approaches and technologies.
+                      </motion.p>
+                    </motion.div>
+                  </CardContent>
+                </Card>
+              </motion.div>
             </TabsContent>
 
             {blockchains.map(blockchain => (
               <TabsContent key={blockchain.id} value={blockchain.id} className="mt-4">
-                <Card className="border-2 border-primary/20 bg-card/50 backdrop-blur">
-                  <CardHeader>
-                    <CardTitle className="font-pixel text-xl">{blockchain.name}</CardTitle>
-                    <CardDescription>{blockchain.description}</CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="grid gap-4 mt-2">
-                      <h3 className="text-lg font-semibold">Βασικά χαρακτηριστικά:</h3>
-                      <ul className="list-disc pl-5 space-y-2">
-                        {blockchain.features.map((feature, index) => (
-                          <li key={index}>{feature}</li>
-                        ))}
-                      </ul>
-                    </div>
-                    
-                    <div className="grid gap-4 mt-4">
-                      <h3 className="text-lg font-semibold">Περιπτώσεις χρήσης:</h3>
-                      <p>{blockchain.useCase}</p>
-                    </div>
-                  </CardContent>
-                </Card>
+                <motion.div
+                  initial="hidden"
+                  animate="visible"
+                  variants={containerVariants}
+                >
+                  <Card className="border-2 border-primary/20 bg-card/50 backdrop-blur overflow-hidden">
+                    <div className={`h-2 bg-gradient-to-r ${blockchain.color} w-full`}></div>
+                    <CardHeader className="flex md:flex-row items-start justify-between">
+                      <div>
+                        <CardTitle className="font-pixel text-xl">{blockchain.name}</CardTitle>
+                        <CardDescription>{blockchain.description}</CardDescription>
+                      </div>
+                      <motion.div 
+                        variants={iconVariants}
+                        className="mt-2 md:mt-0 bg-gradient-to-br p-3 rounded-full shadow-lg backdrop-blur-sm border border-muted"
+                      >
+                        {blockchain.icon}
+                      </motion.div>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <motion.div variants={itemVariants} className="grid gap-4 mt-2">
+                        <h3 className="text-lg font-semibold">Key features:</h3>
+                        <ul className="list-disc pl-5 space-y-2">
+                          {blockchain.features.map((feature, index) => (
+                            <motion.li 
+                              key={index} 
+                              variants={itemVariants}
+                              custom={index}
+                            >
+                              {feature}
+                            </motion.li>
+                          ))}
+                        </ul>
+                      </motion.div>
+                      
+                      <motion.div variants={itemVariants} className="grid gap-4 mt-4">
+                        <h3 className="text-lg font-semibold">Use cases:</h3>
+                        <p>{blockchain.useCase}</p>
+                      </motion.div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
               </TabsContent>
             ))}
           </Tabs>

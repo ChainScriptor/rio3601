@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { ThemeToggle } from "./theme-toggle";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -8,6 +8,7 @@ import { cn } from "@/lib/utils";
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,6 +22,30 @@ export function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    // Only handle # links when on the home page
+    if (href.startsWith("/#") && location.pathname === "/") {
+      e.preventDefault();
+      const id = href.replace("/#", "");
+      const element = document.getElementById(id);
+      
+      if (element) {
+        window.scrollTo({
+          top: element.offsetTop - 80, // Offset for the navbar height
+          behavior: "smooth",
+        });
+        
+        // Close mobile menu if open
+        if (mobileMenuOpen) {
+          setMobileMenuOpen(false);
+        }
+      }
+    } else if (href.startsWith("/#") && location.pathname !== "/") {
+      // If we're not on the home page but the link is to a section on the home page,
+      // don't prevent default so react-router handles the navigation
+    }
+  };
 
   const navItems = [
     { name: "Home", href: "/" },
@@ -54,7 +79,8 @@ export function Navbar() {
           {navItems.map((item) => (
             <Link 
               key={item.name} 
-              to={item.href} 
+              to={item.href}
+              onClick={(e) => handleNavClick(e, item.href)}
               className="nav-link"
             >
               {item.name}
@@ -92,7 +118,10 @@ export function Navbar() {
             <Link
               key={item.name}
               to={item.href}
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={(e) => {
+                handleNavClick(e, item.href);
+                setMobileMenuOpen(false);
+              }}
               className="font-pixel text-base text-foreground hover:text-primary transition-colors"
             >
               {item.name}

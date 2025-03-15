@@ -55,6 +55,7 @@ export function Navbar() {
     { name: "Projects", href: "/#projects" },
     { name: "Contact", href: "/#contact" },
     { name: "Course Videos", href: "/course-videos" },
+    { name: "Airdrops", href: "/airdrops" },
   ];
 
   return (

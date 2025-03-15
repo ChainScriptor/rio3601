@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import CourseVideos from "./pages/CourseVideos";
 import { CourseAdmin } from "./components/courses/course-admin";
+import Airdrops from "./pages/Airdrops";
 
 const queryClient = new QueryClient();
 
@@ -22,6 +23,7 @@ const App = () => (
           <Route path="/course-videos" element={<CourseVideos />} />
           <Route path="/course-videos/:courseId" element={<CourseVideos />} />
           <Route path="/course-videos/admin" element={<CourseAdmin />} />
+          <Route path="/airdrops" element={<Airdrops />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

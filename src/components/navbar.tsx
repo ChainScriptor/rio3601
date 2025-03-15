@@ -28,6 +28,7 @@ export function Navbar() {
     { name: "Blockchain", href: "#blockchain" },
     { name: "Projects", href: "#projects" },
     { name: "Contact", href: "#contact" },
+    { name: "Course Videos", href: "/course-videos" }, // Added Course Videos link
   ];
 
   return (

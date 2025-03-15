@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -84,7 +85,7 @@ export default {
 				'pixel-xl': '12px 12px 0px 0px rgba(0,0,0,0.2)',
 				'pixel-2xl': '16px 16px 0px 0px rgba(0,0,0,0.2)',
 			},
-			cursors: {
+			cursor: {
 				'pixel': 'url("/cursors/pixel-cursor.png"), auto',
 			},
 			keyframes: {

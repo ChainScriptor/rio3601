@@ -48,7 +48,6 @@ export function Navbar() {
   };
 
   const navItems = [
-    { name: "Home", href: "/" },
     { name: "About", href: "/#about" },
     { name: "Skills", href: "/#skills" },
     { name: "Blockchain", href: "/#blockchain" },

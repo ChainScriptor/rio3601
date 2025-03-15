@@ -1,5 +1,6 @@
 
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { ThemeToggle } from "./theme-toggle";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -22,13 +23,13 @@ export function Navbar() {
   }, []);
 
   const navItems = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Skills", href: "#skills" },
-    { name: "Blockchain", href: "#blockchain" },
-    { name: "Projects", href: "#projects" },
-    { name: "Contact", href: "#contact" },
-    { name: "Course Videos", href: "/course-videos" }, // Added Course Videos link
+    { name: "Home", href: "/" },
+    { name: "About", href: "/#about" },
+    { name: "Skills", href: "/#skills" },
+    { name: "Blockchain", href: "/#blockchain" },
+    { name: "Projects", href: "/#projects" },
+    { name: "Contact", href: "/#contact" },
+    { name: "Course Videos", href: "/course-videos" },
   ];
 
   return (
@@ -41,23 +42,23 @@ export function Navbar() {
       )}
     >
       <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-        <a 
-          href="#" 
+        <Link 
+          to="/" 
           className="font-pixel text-sm md:text-base text-foreground hover:text-primary transition-colors"
         >
           DEV<span className="text-primary">::</span>PORTFOLIO
-        </a>
+        </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-6">
           {navItems.map((item) => (
-            <a 
+            <Link 
               key={item.name} 
-              href={item.href} 
+              to={item.href} 
               className="nav-link"
             >
               {item.name}
-            </a>
+            </Link>
           ))}
           <ThemeToggle />
         </nav>
@@ -88,14 +89,14 @@ export function Navbar() {
       >
         <nav className="flex flex-col items-center space-y-6 px-4 py-8">
           {navItems.map((item) => (
-            <a
+            <Link
               key={item.name}
-              href={item.href}
+              to={item.href}
               onClick={() => setMobileMenuOpen(false)}
               className="font-pixel text-base text-foreground hover:text-primary transition-colors"
             >
               {item.name}
-            </a>
+            </Link>
           ))}
         </nav>
       </div>

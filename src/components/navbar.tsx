@@ -4,6 +4,7 @@ import { Link, useLocation } from "react-router-dom";
 import { ThemeToggle } from "./theme-toggle";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { DevWallet } from "./wallet/DevWallet";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -87,11 +88,13 @@ export function Navbar() {
               {item.name}
             </Link>
           ))}
+          <DevWallet />
           <ThemeToggle />
         </nav>
 
         {/* Mobile Menu Toggle */}
         <div className="flex items-center md:hidden">
+          <DevWallet />
           <ThemeToggle />
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

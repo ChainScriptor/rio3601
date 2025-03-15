@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -58,6 +57,8 @@ export default {
 					blue: '#38B5FF',
 					purple: '#9C5FFF',
 					pink: '#FF6AC2',
+					magenta: '#D946EF', // Added the magenta pink color for the cursor
+					lightPink: '#FFDEE2', // Added a soft pink color as an alternative
 					yellow: '#FFDE59',
 					orange: '#FF914D',
 					red: '#FF5757',
@@ -82,6 +83,9 @@ export default {
 				'pixel-lg': '8px 8px 0px 0px rgba(0,0,0,0.2)',
 				'pixel-xl': '12px 12px 0px 0px rgba(0,0,0,0.2)',
 				'pixel-2xl': '16px 16px 0px 0px rgba(0,0,0,0.2)',
+			},
+			cursors: {
+				'pixel': 'url("/cursors/pixel-cursor.png"), auto',
 			},
 			keyframes: {
 				'accordion-down': {

@@ -9,28 +9,25 @@ import NotFound from "./pages/NotFound";
 import CourseVideos from "./pages/CourseVideos";
 import { CourseAdmin } from "./components/courses/course-admin";
 import Airdrops from "./pages/Airdrops";
-import { WalletProvider } from "./contexts/WalletContext";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <WalletProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/course-videos" element={<CourseVideos />} />
-            <Route path="/course-videos/:courseId" element={<CourseVideos />} />
-            <Route path="/course-videos/admin" element={<CourseAdmin />} />
-            <Route path="/airdrops" element={<Airdrops />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </WalletProvider>
+      <Toaster />
+      <Sonner />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Index />} />
+          <Route path="/course-videos" element={<CourseVideos />} />
+          <Route path="/course-videos/:courseId" element={<CourseVideos />} />
+          <Route path="/course-videos/admin" element={<CourseAdmin />} />
+          <Route path="/airdrops" element={<Airdrops />} />
+          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
 );

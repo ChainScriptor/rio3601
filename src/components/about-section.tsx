@@ -25,20 +25,22 @@ export function AboutSection() {
               
               <div className="space-y-4 font-mono">
                 <p className="text-foreground">
-                  Welcome to my digital realm! I'm a passionate blockchain developer and software engineer 
-                  with expertise in building decentralized applications and robust web solutions.
+                  I am an undergraduate student passionate about blockchain technology, with a strong focus on Solidity 
+                  and smart contract development. My goal is to build my own DeFi platform and develop innovative Web3 applications.
                 </p>
                 
                 <p className="text-muted-foreground">
-                  With a background in computer science and a deep understanding of blockchain technology, 
-                  I bridge the gap between cutting-edge tech and user-friendly experiences. My journey in 
-                  software development has equipped me with the skills to tackle complex problems with 
-                  elegant solutions.
+                  Beyond blockchain, I have experience with frontend technologies such as Next.js, React, and Tailwind CSS, 
+                  allowing me to create modern and efficient user interfaces.
                 </p>
                 
                 <p className="text-muted-foreground">
-                  When I'm not coding, you'll find me exploring new technologies, contributing to open-source 
-                  projects, or sharing knowledge with the community through articles and workshops.
+                  Originally from Thessaloniki, I am currently working in Rotterdam. I have also completed my military service, 
+                  allowing me to fully dedicate myself to my career in blockchain development.
+                </p>
+                
+                <p className="text-muted-foreground">
+                  I am always eager to learn, explore new technologies, and contribute to the decentralized future.
                 </p>
                 
                 <div className="pt-4">

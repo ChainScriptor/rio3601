@@ -23,6 +23,8 @@ export function AboutSection() {
             <div className="w-full md:w-2/3">
               <h2 className="section-title text-primary">About Me</h2>
               
+              <h3 className="text-xl font-pixel mb-4 text-foreground">Hey, I am Staths Mavridis</h3>
+              
               <div className="space-y-4 font-mono">
                 <p className="text-foreground">
                   I am an undergraduate student passionate about blockchain technology, with a strong focus on Solidity 

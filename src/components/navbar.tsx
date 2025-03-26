@@ -53,7 +53,7 @@ export function Navbar() {
     { name: "Blockchain", href: "/#blockchain" },
     { name: "Projects", href: "/#projects" },
     { name: "Contact", href: "/#contact" },
-    { name: "Courses", href: "/courses" },
+    { name: "Courses", href: "/course-videos" },
     { name: "Airdrops", href: "/airdrops" },
   ];
 

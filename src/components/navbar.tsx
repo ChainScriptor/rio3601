@@ -23,6 +23,24 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [mobileMenuOpen]);
+
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     // Only handle # links when on the home page
     if (href.startsWith("/#") && location.pathname === "/") {
@@ -66,26 +84,49 @@ export function Navbar() {
           : "bg-transparent"
       )}
     >
-      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 flex items-center justify-between">
         <Link 
           to="/" 
-          className="font-pixel text-sm md:text-base text-foreground hover:text-primary transition-colors"
+          className="font-pixel text-xs sm:text-sm md:text-base text-foreground hover:text-primary transition-colors z-50 relative"
+          onClick={() => setMobileMenuOpen(false)}
         >
           DEV<span className="text-primary">::</span>PORTFOLIO
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-6">
+        <nav className="hidden lg:flex items-center space-x-4 xl:space-x-6">
           {navItems.map((item) => (
             <Link 
               key={item.name} 
               to={item.href}
               onClick={(e) => handleNavClick(e, item.href)}
-              className="nav-link"
+              className="nav-link text-xs xl:text-sm"
             >
               {item.name}
             </Link>
           ))}
+          <ThemeToggle />
+        </nav>
+
+        {/* Tablet Navigation */}
+        <nav className="hidden md:flex lg:hidden items-center space-x-3">
+          {navItems.slice(0, 4).map((item) => (
+            <Link 
+              key={item.name} 
+              to={item.href}
+              onClick={(e) => handleNavClick(e, item.href)}
+              className="nav-link text-xs"
+            >
+              {item.name}
+            </Link>
+          ))}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="p-2 text-foreground hover:text-primary transition-colors"
+            aria-label="More options"
+          >
+            <Menu className="h-5 w-5" />
+          </button>
           <ThemeToggle />
         </nav>
 
@@ -94,14 +135,23 @@ export function Navbar() {
           <ThemeToggle />
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="ml-4 p-1 text-foreground"
+            className="ml-3 p-2 text-foreground hover:text-primary transition-colors z-50 relative"
             aria-label="Toggle menu"
           >
-            {mobileMenuOpen ? (
-              <X className="h-6 w-6" />
-            ) : (
-              <Menu className="h-6 w-6" />
-            )}
+            <div className="relative w-6 h-6">
+              <span className={cn(
+                "absolute h-0.5 w-6 bg-current transform transition-all duration-300 ease-in-out",
+                mobileMenuOpen ? "rotate-45 translate-y-0" : "-translate-y-2"
+              )} />
+              <span className={cn(
+                "absolute h-0.5 w-6 bg-current transform transition-all duration-300 ease-in-out",
+                mobileMenuOpen ? "opacity-0" : "opacity-100"
+              )} />
+              <span className={cn(
+                "absolute h-0.5 w-6 bg-current transform transition-all duration-300 ease-in-out",
+                mobileMenuOpen ? "-rotate-45 translate-y-0" : "translate-y-2"
+              )} />
+            </div>
           </button>
         </div>
       </div>
@@ -109,25 +159,46 @@ export function Navbar() {
       {/* Mobile Navigation */}
       <div
         className={cn(
-          "md:hidden fixed inset-0 z-40 bg-background transform transition-transform duration-300 ease-in-out pt-16",
-          mobileMenuOpen ? "translate-x-0" : "translate-x-full"
+          "fixed inset-0 z-40 transform transition-all duration-300 ease-in-out",
+          "md:hidden lg:hidden",
+          mobileMenuOpen 
+            ? "translate-x-0 opacity-100" 
+            : "translate-x-full opacity-0"
         )}
       >
-        <nav className="flex flex-col items-center space-y-6 px-4 py-8">
-          {navItems.map((item) => (
-            <Link
-              key={item.name}
-              to={item.href}
-              onClick={(e) => {
-                handleNavClick(e, item.href);
-                setMobileMenuOpen(false);
-              }}
-              className="font-pixel text-base text-foreground hover:text-primary transition-colors"
-            >
-              {item.name}
-            </Link>
-          ))}
-        </nav>
+        {/* Backdrop */}
+        <div 
+          className="absolute inset-0 bg-background/95 backdrop-blur-sm"
+          onClick={() => setMobileMenuOpen(false)}
+        />
+        
+        {/* Menu Content */}
+        <div className="relative flex flex-col h-full">
+          <div className="flex-1 flex flex-col justify-center items-center space-y-8 px-6">
+            {navItems.map((item, index) => (
+              <Link
+                key={item.name}
+                to={item.href}
+                onClick={(e) => {
+                  handleNavClick(e, item.href);
+                  setMobileMenuOpen(false);
+                }}
+                className={cn(
+                  "font-pixel text-lg sm:text-xl text-foreground hover:text-primary",
+                  "transition-all duration-300 transform hover:scale-110",
+                  "opacity-0 translate-y-4",
+                  mobileMenuOpen && "animate-fade-in-up"
+                )}
+                style={{
+                  animationDelay: mobileMenuOpen ? `${index * 100}ms` : "0ms",
+                  animationFillMode: "forwards"
+                }}
+              >
+                {item.name}
+              </Link>
+            ))}
+          </div>
+        </div>
       </div>
     </header>
   );

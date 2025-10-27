@@ -35,7 +35,7 @@ export function Navbar() {
     } else {
       document.body.style.overflow = 'unset';
     }
-    
+
     return () => {
       document.body.style.overflow = 'unset';
     };
@@ -47,13 +47,13 @@ export function Navbar() {
       e.preventDefault();
       const id = href.replace("/#", "");
       const element = document.getElementById(id);
-      
+
       if (element) {
         window.scrollTo({
           top: element.offsetTop - 80, // Offset for the navbar height
           behavior: "smooth",
         });
-        
+
         // Close mobile menu if open
         if (mobileMenuOpen) {
           setMobileMenuOpen(false);
@@ -67,11 +67,13 @@ export function Navbar() {
 
   const navItems = [
     { name: "About", href: "/#about" },
+    { name: "Courses", href: "/#courses" },
     { name: "Skills", href: "/#skills" },
     { name: "Blockchain", href: "/#blockchain" },
     { name: "Projects", href: "/#projects" },
     { name: "Contact", href: "/#contact" },
-    { name: "Courses", href: "/course-videos" },
+    { name: "Code Editor", href: "/code-editor" },
+    { name: "Course Videos", href: "/course-videos" },
     { name: "Airdrops", href: "/airdrops" },
   ];
 
@@ -79,14 +81,14 @@ export function Navbar() {
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-        isScrolled 
-          ? "bg-background/80 backdrop-blur-sm border-b border-border shadow-sm" 
+        isScrolled
+          ? "bg-background/80 backdrop-blur-sm border-b border-border shadow-sm"
           : "bg-transparent"
       )}
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4 flex items-center justify-between">
-        <Link 
-          to="/" 
+        <Link
+          to="/"
           className="font-pixel text-xs sm:text-sm md:text-base text-foreground hover:text-primary transition-colors z-50 relative"
           onClick={() => setMobileMenuOpen(false)}
         >
@@ -96,8 +98,8 @@ export function Navbar() {
         {/* Desktop Navigation */}
         <nav className="hidden lg:flex items-center space-x-4 xl:space-x-6">
           {navItems.map((item) => (
-            <Link 
-              key={item.name} 
+            <Link
+              key={item.name}
               to={item.href}
               onClick={(e) => handleNavClick(e, item.href)}
               className="nav-link text-xs xl:text-sm"
@@ -111,8 +113,8 @@ export function Navbar() {
         {/* Tablet Navigation */}
         <nav className="hidden md:flex lg:hidden items-center space-x-3">
           {navItems.slice(0, 4).map((item) => (
-            <Link 
-              key={item.name} 
+            <Link
+              key={item.name}
               to={item.href}
               onClick={(e) => handleNavClick(e, item.href)}
               className="nav-link text-xs"
@@ -161,17 +163,17 @@ export function Navbar() {
         className={cn(
           "fixed inset-0 z-40 transform transition-all duration-300 ease-in-out",
           "md:hidden lg:hidden",
-          mobileMenuOpen 
-            ? "translate-x-0 opacity-100" 
+          mobileMenuOpen
+            ? "translate-x-0 opacity-100"
             : "translate-x-full opacity-0"
         )}
       >
         {/* Backdrop */}
-        <div 
+        <div
           className="absolute inset-0 bg-background/95 backdrop-blur-sm"
           onClick={() => setMobileMenuOpen(false)}
         />
-        
+
         {/* Menu Content */}
         <div className="relative flex flex-col h-full">
           <div className="flex-1 flex flex-col justify-center items-center space-y-8 px-6">

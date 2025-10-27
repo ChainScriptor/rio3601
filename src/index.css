@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
@@ -74,30 +73,49 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground font-mono;
     image-rendering: pixelated;
     cursor: url("/cursors/pixel-cursor.png"), auto !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
-  
+
+  /* Improve touch targets on mobile */
+  @media (max-width: 640px) {
+
+    a,
+    button,
+    [role="button"] {
+      min-height: 44px;
+      min-width: 44px;
+    }
+  }
+
+  /* Improve scrolling on mobile */
+  @media (max-width: 768px) {
+    * {
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+
   /* Pixel Art styles */
   .pixel-corners {
-    clip-path: polygon(
-      0px 4px,
-      4px 0px,
-      calc(100% - 4px) 0px,
-      100% 4px,
-      100% calc(100% - 4px),
-      calc(100% - 4px) 100%,
-      4px 100%,
-      0px calc(100% - 4px)
-    );
+    clip-path: polygon(0px 4px,
+        4px 0px,
+        calc(100% - 4px) 0px,
+        100% 4px,
+        100% calc(100% - 4px),
+        calc(100% - 4px) 100%,
+        4px 100%,
+        0px calc(100% - 4px));
   }
-  
+
   .pixel-shadow {
     position: relative;
   }
-  
+
   .pixel-shadow::after {
     content: '';
     position: absolute;
@@ -108,12 +126,12 @@
     background: rgba(0, 0, 0, 0.2);
     z-index: -1;
   }
-  
+
   .pixel-border {
     position: relative;
     box-shadow: 0 0 0 2px currentColor;
   }
-  
+
   .pixel-border::before {
     content: '';
     position: absolute;
@@ -125,31 +143,31 @@
     z-index: 1;
     pointer-events: none;
   }
-  
+
   /* Added a class for the pixelated image rendering instead of inline styles */
   .pixel-img-rendering {
     image-rendering: pixelated;
   }
-  
+
   /* Animations */
   .animate-delayed {
     animation-delay: 300ms;
   }
-  
+
   .animate-delayed-medium {
     animation-delay: 600ms;
   }
-  
+
   .animate-delayed-long {
     animation-delay: 900ms;
   }
-  
+
   /* Grid background with scanlines for CRT effect */
   .crt-overlay {
     position: relative;
     overflow: hidden;
   }
-  
+
   .crt-overlay::before {
     content: "";
     display: block;
@@ -158,16 +176,14 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(
-      rgba(18, 16, 16, 0) 50%,
-      rgba(0, 0, 0, 0.05) 50%
-    );
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%,
+        rgba(0, 0, 0, 0.05) 50%);
     background-size: 100% 4px;
     z-index: 2;
     pointer-events: none;
     opacity: 0.15;
   }
-  
+
   /* Terminal text effect */
   .terminal-text::after {
     content: "|";
@@ -178,60 +194,57 @@
 /* Pixel art button and UI component styles */
 @layer components {
   .pixel-btn {
-    @apply relative inline-flex items-center justify-center bg-primary text-primary-foreground 
-           font-pixel text-xs py-2 px-4 no-underline uppercase tracking-wide
-           transition-all duration-150 ease-in-out shadow-pixel;
+    @apply relative inline-flex items-center justify-center bg-primary text-primary-foreground font-pixel text-xs py-2 px-4 no-underline uppercase tracking-wide transition-all duration-150 ease-in-out shadow-pixel;
     image-rendering: pixelated;
+    touch-action: manipulation;
   }
-  
+
   .pixel-btn:hover {
     @apply transform -translate-y-1 shadow-pixel-md;
   }
-  
+
   .pixel-btn:active {
     @apply transform translate-y-0 shadow-pixel;
   }
-  
+
   .pixel-card {
     @apply relative bg-card p-5 shadow-pixel border-2 border-border;
     image-rendering: pixelated;
   }
-  
+
   .pixel-input {
-    @apply bg-background border-2 border-border px-4 py-2 outline-none focus:border-primary
-           transition-colors duration-200 shadow-pixel font-mono;
+    @apply bg-background border-2 border-border px-4 py-2 outline-none focus:border-primary transition-colors duration-200 shadow-pixel font-mono;
   }
-  
+
   .nav-link {
-    @apply relative px-2 py-1 text-foreground transition-colors
-           hover:text-primary focus:text-primary font-pixel text-xs;
+    @apply relative px-2 py-1 text-foreground transition-colors hover:text-primary focus:text-primary font-pixel text-xs;
+    touch-action: manipulation;
   }
-  
+
   .nav-link::after {
     content: '';
     @apply absolute bottom-0 left-0 w-0 h-[3px] bg-primary transition-all duration-300;
   }
-  
+
   .nav-link:hover::after {
     @apply w-full;
   }
-  
+
   .section-title {
     @apply font-pixel text-2xl mb-8 inline-block;
     text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1);
   }
-  
+
   .pixel-progress {
     @apply h-6 w-full bg-muted relative overflow-hidden border-2 border-border;
   }
-  
+
   .pixel-progress-bar {
     @apply h-full bg-primary transition-all duration-500 ease-out;
   }
-  
+
   .tech-badge {
-    @apply inline-flex items-center px-3 py-1 font-pixel text-xs 
-           bg-muted text-foreground shadow-pixel border border-border;
+    @apply inline-flex items-center px-3 py-1 font-pixel text-xs bg-muted text-foreground shadow-pixel border border-border;
   }
 }
 
@@ -241,7 +254,14 @@
 }
 
 /* Add interactive elements hover cursor */
-a, button, [role="button"], input[type="submit"], input[type="button"], 
-.cursor-pointer, .interactive, .nav-link, .pixel-btn {
+a,
+button,
+[role="button"],
+input[type="submit"],
+input[type="button"],
+.cursor-pointer,
+.interactive,
+.nav-link,
+.pixel-btn {
   @apply clickable;
 }

@@ -1,10 +1,10 @@
 
-import { 
-  Database, 
-  Code2, 
-  LineChart, 
-  ShieldCheck, 
-  Layers, 
+import {
+  Database,
+  Code2,
+  LineChart,
+  ShieldCheck,
+  Layers,
   GitBranch,
   Server,
   Globe
@@ -71,30 +71,30 @@ export function SkillsSection() {
   ];
 
   const techStack = [
-    "Ethereum", "Solidity", "Hardhat", "Truffle", "IPFS", 
+    "Ethereum", "Solidity", "Hardhat", "Truffle", "IPFS",
     "React", "Next.js", "Node.js", "Express", "TypeScript",
     "MongoDB", "PostgreSQL", "AWS", "Docker", "Git",
     "Web3.js", "Ethers.js", "Metamask", "Ganache", "Infura"
   ];
 
   return (
-    <section 
-      id="skills" 
-      className="py-20 bg-secondary/50 relative overflow-hidden"
+    <section
+      id="skills"
+      className="py-12 sm:py-16 md:py-20 bg-secondary/50 relative overflow-hidden"
     >
-      <div className="container px-4 mx-auto">
+      <div className="container px-4 sm:px-6 mx-auto">
         <div className="max-w-5xl mx-auto">
-          <h2 className="section-title text-center mb-16 relative">
+          <h2 className="section-title text-center mb-8 sm:mb-12 md:mb-16 relative text-2xl sm:text-3xl md:text-4xl">
             <span className="relative z-10">Technical Skills</span>
             <span className="absolute -bottom-1 left-0 w-full h-1 bg-primary"></span>
           </h2>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16">
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 md:gap-10 mb-8 sm:mb-12 md:mb-16">
             {technicalSkills.map((skill) => (
               <div key={skill.name} className="relative">
-                <div className="flex items-center mb-2">
-                  <div className="mr-2 flex-shrink-0">{skill.icon}</div>
-                  <h3 className="font-pixel text-xs">{skill.name}</h3>
+                <div className="flex items-center mb-1.5 sm:mb-2">
+                  <div className="mr-1.5 sm:mr-2 flex-shrink-0">{skill.icon}</div>
+                  <h3 className="font-pixel text-[10px] sm:text-xs">{skill.name}</h3>
                 </div>
                 <div className="pixel-progress">
                   <div
@@ -105,12 +105,12 @@ export function SkillsSection() {
               </div>
             ))}
           </div>
-          
+
           <div>
-            <h3 className="font-pixel text-sm mb-6 text-center">Tech Stack</h3>
-            <div className="flex flex-wrap justify-center gap-3">
+            <h3 className="font-pixel text-xs sm:text-sm mb-4 sm:mb-6 text-center">Tech Stack</h3>
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
               {techStack.map((tech) => (
-                <span key={tech} className="tech-badge">
+                <span key={tech} className="tech-badge text-[10px] sm:text-xs">
                   {tech}
                 </span>
               ))}

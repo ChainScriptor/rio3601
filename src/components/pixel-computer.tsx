@@ -23,12 +23,12 @@ interface WindowProps {
   onMaximize?: () => void;
 }
 
-const PixelWindow = ({ 
-  title, 
-  children, 
-  onClose, 
+const PixelWindow = ({
+  title,
+  children,
+  onClose,
   className,
-  width = "w-full", 
+  width = "w-full",
   height = "h-full",
   defaultFocus = false,
   minimized = false,
@@ -71,10 +71,10 @@ const BlockchainExplorer = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedBlockchain, setSelectedBlockchain] = useState<string | null>(null);
   const [activeFolder, setActiveFolder] = useState<string | null>("blockchains");
-  const [openWindows, setOpenWindows] = useState<{id: string, title: string, content: string}[]>([]);
-  const [windowPositions, setWindowPositions] = useState<{[key: string]: number}>({});
+  const [openWindows, setOpenWindows] = useState<{ id: string, title: string, content: string }[]>([]);
+  const [windowPositions, setWindowPositions] = useState<{ [key: string]: number }>({});
   const isMobile = useIsMobile();
-  
+
   const blockchains = [
     {
       id: "bitcoin",
@@ -137,36 +137,36 @@ const BlockchainExplorer = () => {
       useCase: "Connecting different blockchains and creating specialized chains."
     }
   ];
-  
+
   const handleOpenBlockchain = (id: string) => {
     const blockchain = blockchains.find(b => b.id === id);
     if (!blockchain) return;
-    
+
     const newWindow = {
       id: `blockchain-${id}-${Date.now()}`,
       title: `${blockchain.name} Explorer`,
       content: id
     };
-    
+
     setOpenWindows(prev => [...prev, newWindow]);
-    setWindowPositions(prev => ({...prev, [newWindow.id]: prev[newWindow.id] || 0}));
+    setWindowPositions(prev => ({ ...prev, [newWindow.id]: prev[newWindow.id] || 0 }));
   };
-  
+
   const handleClose = (id: string) => {
     setOpenWindows(prev => prev.filter(w => w.id !== id));
   };
-  
+
   const renderBlockchainContent = (id: string) => {
     const blockchain = blockchains.find(b => b.id === id);
     if (!blockchain) return null;
-    
+
     return (
       <div className="p-4 font-mono text-sm space-y-4 bg-white text-black h-full">
         <div className="mb-4">
           <h3 className="font-pixel text-lg text-primary mb-2">{blockchain.name}</h3>
           <p className="mb-2 text-xs">{blockchain.description}</p>
         </div>
-        
+
         <div className="mb-4">
           <h4 className="font-pixel text-xs text-accent mb-2">KEY FEATURES:</h4>
           <ul className="list-disc pl-5 text-xs space-y-1">
@@ -175,12 +175,12 @@ const BlockchainExplorer = () => {
             ))}
           </ul>
         </div>
-        
+
         <div>
           <h4 className="font-pixel text-xs text-accent mb-2">USE CASES:</h4>
           <p className="text-xs">{blockchain.useCase}</p>
         </div>
-        
+
         <div className="mt-6 bg-secondary/50 p-3 pixel-corners">
           <div className="flex justify-between items-center">
             <span className="font-pixel text-[10px]">ACHIEVEMENT UNLOCKED</span>
@@ -206,18 +206,18 @@ const BlockchainExplorer = () => {
           <button className="text-xs font-pixel px-2 hover:bg-primary-foreground/20 rounded">Help</button>
         </div>
       </div>
-      
+
       <div className="flex-1 flex">
         <ResizablePanelGroup direction="horizontal">
-          <ResizablePanel 
-            defaultSize={isMobile ? 30 : 20} 
-            minSize={isMobile ? 30 : 15} 
+          <ResizablePanel
+            defaultSize={isMobile ? 30 : 20}
+            minSize={isMobile ? 30 : 15}
             className="bg-card/80 min-w-[120px]"
           >
             <div className="p-2">
               <h3 className="font-pixel text-xs mb-2">Explore</h3>
               <div className="space-y-1">
-                <div 
+                <div
                   onClick={() => setActiveFolder("blockchains")}
                   className={cn(
                     "flex items-center gap-1 p-1 text-xs cursor-pointer hover:bg-accent/30 rounded",
@@ -231,11 +231,11 @@ const BlockchainExplorer = () => {
                   )}
                   <span>Blockchains</span>
                 </div>
-                
+
                 {activeFolder === "blockchains" && (
                   <div className="pl-4 space-y-1">
                     {blockchains.map(blockchain => (
-                      <div 
+                      <div
                         key={blockchain.id}
                         onClick={() => handleOpenBlockchain(blockchain.id)}
                         className="flex items-center gap-1 p-1 text-xs cursor-pointer hover:bg-accent/30 rounded"
@@ -246,7 +246,7 @@ const BlockchainExplorer = () => {
                     ))}
                   </div>
                 )}
-                
+
                 <div className="flex items-center gap-1 p-1 text-xs cursor-pointer hover:bg-accent/30 rounded">
                   <Folder className="h-3 w-3" />
                   <span>Crypto</span>
@@ -262,16 +262,16 @@ const BlockchainExplorer = () => {
               </div>
             </div>
           </ResizablePanel>
-          
+
           <ResizableHandle withHandle />
-          
+
           <ResizablePanel defaultSize={isMobile ? 70 : 80}>
             <div className="relative h-full bg-background/90 p-2">
               <div className="absolute top-2 left-2 right-2">
                 <div className="flex items-center gap-2 mb-2">
                   <div className="relative flex-1">
                     <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 h-3 w-3 text-muted-foreground" />
-                    <Input 
+                    <Input
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
                       placeholder="Search blockchains..."
@@ -280,7 +280,7 @@ const BlockchainExplorer = () => {
                   </div>
                 </div>
               </div>
-              
+
               <div className="mt-12 relative h-[calc(100%-3rem)]">
                 {/* Desktop area */}
                 <div className={cn(
@@ -290,7 +290,7 @@ const BlockchainExplorer = () => {
                   {blockchains
                     .filter(b => b.name.toLowerCase().includes(searchTerm.toLowerCase()))
                     .map(blockchain => (
-                      <div 
+                      <div
                         key={blockchain.id}
                         onClick={() => handleOpenBlockchain(blockchain.id)}
                         className="flex flex-col items-center justify-center p-2 cursor-pointer hover:bg-accent/20 rounded text-center"
@@ -300,10 +300,10 @@ const BlockchainExplorer = () => {
                       </div>
                     ))}
                 </div>
-                
+
                 {/* Windows layer */}
                 {openWindows.map((window, index) => (
-                  <PixelWindow 
+                  <PixelWindow
                     key={window.id}
                     title={window.title}
                     className="absolute inset-0 m-2"
@@ -319,7 +319,7 @@ const BlockchainExplorer = () => {
           </ResizablePanel>
         </ResizablePanelGroup>
       </div>
-      
+
       <div className="bg-primary text-primary-foreground p-1 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <button className="bg-primary-foreground/20 rounded p-1">
@@ -336,31 +336,31 @@ const BlockchainExplorer = () => {
 
 export function PixelComputer() {
   const isMobile = useIsMobile();
-  
+
   return (
-    <div className="relative py-16 md:py-24 min-h-[100vh] w-full bg-pixel-darkBlue bg-pixel-grid bg-[length:20px_20px] overflow-hidden">
+    <div className="relative py-8 sm:py-12 md:py-16 lg:py-24 min-h-[600px] sm:min-h-[700px] md:min-h-[80vh] w-full bg-pixel-darkBlue bg-pixel-grid bg-[length:20px_20px] overflow-hidden">
       <div className="absolute inset-0 crt-overlay pointer-events-none"></div>
-      
+
       {/* Background image */}
-      <div className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-70" 
-           style={{ backgroundImage: 'url("/lovable-uploads/47970209-706b-487e-8627-d769dc745c6d.png")' }}>
+      <div className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-70"
+        style={{ backgroundImage: 'url("/lovable-uploads/47970209-706b-487e-8627-d769dc745c6d.png")' }}>
       </div>
-      
+
       {/* Computer frame */}
-      <div className="relative z-10 w-[95%] md:w-[90%] lg:w-[80%] mx-auto h-[80vh] md:h-[90vh] flex flex-col">
-        <div className="w-full h-4 bg-foreground/90 rounded-t-lg"></div>
-        
+      <div className="relative z-10 w-[95%] sm:w-[90%] md:w-[85%] lg:w-[80%] mx-auto h-[600px] sm:h-[700px] md:h-[80vh] lg:h-[90vh] flex flex-col">
+        <div className="w-full h-2 sm:h-3 md:h-4 bg-foreground/90 rounded-t-lg"></div>
+
         {/* Monitor bezel */}
-        <div className="flex-1 bg-foreground/90 flex p-1 md:p-4">
+        <div className="flex-1 bg-foreground/90 flex p-1 sm:p-2 md:p-3 lg:p-4">
           {/* Screen area */}
-          <div className="w-full h-full bg-background pixel-corners overflow-hidden shadow-inner border-4 border-black/20 crt-overlay">
+          <div className="w-full h-full bg-background pixel-corners overflow-hidden shadow-inner border-2 sm:border-4 border-black/20 crt-overlay">
             <BlockchainExplorer />
           </div>
         </div>
-        
+
         {/* Computer base */}
-        <div className="h-4 md:h-8 bg-foreground/90 rounded-b-lg flex items-center justify-center">
-          <div className="h-1 md:h-2 w-12 md:w-24 bg-primary/30 rounded-full"></div>
+        <div className="h-2 sm:h-4 md:h-6 lg:h-8 bg-foreground/90 rounded-b-lg flex items-center justify-center">
+          <div className="h-0.5 sm:h-1 md:h-2 w-8 sm:w-12 md:w-16 lg:w-24 bg-primary/30 rounded-full"></div>
         </div>
       </div>
     </div>

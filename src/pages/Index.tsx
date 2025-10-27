@@ -1,7 +1,8 @@
 
-import { Navbar } from "@/components/navbar";
+import { AnimatedNavbar } from "@/components/animated-navbar";
 import { HeroSection } from "@/components/hero-section";
 import { AboutSection } from "@/components/about-section";
+import { CoursesSection } from "@/components/courses-section";
 import { SkillsSection } from "@/components/skills-section";
 import { ProjectsSection } from "@/components/projects-section";
 import { ContactSection } from "@/components/contact-section";
@@ -11,12 +12,13 @@ import { ThemeProvider } from "@/components/theme-provider";
 
 const Index = () => {
   return (
-    <ThemeProvider defaultTheme="system" storageKey="portfolio-theme">
+    <ThemeProvider defaultTheme="light" storageKey="portfolio-theme">
       <div className="min-h-screen flex flex-col">
-        <Navbar />
+        <AnimatedNavbar />
         <main className="flex-grow">
           <HeroSection />
           <AboutSection />
+          <CoursesSection />
           <SkillsSection />
           <div id="blockchain" className="w-full">
             <PixelComputer />
